@@ -20,7 +20,7 @@ const connectionDb = async () => {
 connectionDb();
 
 app.get('/', (req, res) => {
-  res.json('Hello World! Here is Ali Raza Afzal First backend project deployement...');
+  res.json('Hello World! Here is Ali Raza Afzal first node app connected with MongoDB deployeed');
 });
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
