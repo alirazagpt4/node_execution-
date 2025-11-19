@@ -1,30 +1,28 @@
-import express from 'express';
-import mongoose from 'mongoose';
-const app = express();
-const port = 3000;
-import dotenv from 'dotenv';
 dotenv.config();
+import express from 'express';
+import morgan from 'morgan'
+import dotenv from 'dotenv';
+import connectionDb from './Config/db.js';
+import userRoutes from "./Routes/user.routes.js";
+const app = express();
+const port = process.env.PORT || 3000;
 
-const connectionDb = async () => {
-    try {
-        console.log("Connecting to DB...");
-        await mongoose.connect(process.env.MONGO_URI);
 
-        console.log("Database connected successfully");
-        
-    } catch (err) {
-        console.log("Database connection failed:", err);
-    }
-};
 
 connectionDb();
+app.use(express.json());
+app.use(morgan('dev'));
+
 
 app.get('/', (req, res) => {
   res.json('Hello World! Here is Ali Raza Afzal first node app connected with MongoDB deployeed');
 });
+
+app.use('/api/users', userRoutes);
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
 
-// mongodb+srv://ali4aug24webgpt:
+
